@@ -33,6 +33,54 @@ python app.py
 
 Then open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
 
+## Docker
+
+### Build and run
+
+```bash
+docker build -t metarrepo .
+docker run -p 5000:5000 metarrepo
+```
+
+Then open [http://localhost:5000](http://localhost:5000) in your browser.
+
+### Run a specific version
+
+Tag your builds to make rollbacks easy:
+
+```bash
+docker build -t metarrepo:1.0 .
+docker run -p 5000:5000 metarrepo:1.0
+```
+
+### Run in the background
+
+```bash
+docker run -d -p 5000:5000 --name metar metarrepo
+docker logs metar        # view logs
+docker stop metar        # stop the container
+docker rm metar          # remove the container
+```
+
+### Docker Compose (optional)
+
+Create a `docker-compose.yml` file:
+
+```yaml
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+```
+
+Then start with:
+
+```bash
+docker compose up -d
+```
+
 ## Usage
 
 Type a 4-letter ICAO airport code into the search box and press **Get Weather**. ICAO codes differ from the 3-letter FAA codes used in the US — prefix a `K` to most US airport identifiers (e.g. LAX → `KLAX`, JFK → `KJFK`). International examples: London Heathrow (`EGLL`), Tokyo Haneda (`RJTT`), Sydney (`YSSY`).
