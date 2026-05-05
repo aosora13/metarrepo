@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(python app.py)",
+      "Bash(curl -s -X POST http://127.0.0.1:5000/ -d \"airport=KIAD\")",
+      "Bash(curl -s -X POST http://127.0.0.1:5000/ -d \"airport=XXXX\")",
+      "Bash(curl -s -X POST http://127.0.0.1:5000/ -d \"airport=EGLL\")"
+    ]
+  }
+}
