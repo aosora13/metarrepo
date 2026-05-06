@@ -81,6 +81,26 @@ Then start with:
 docker compose up -d
 ```
 
+## Testing
+
+Install dev dependencies (pytest is included in `requirements.txt`) and run:
+
+```bash
+python -m pytest test_app.py -v
+```
+
+The test suite has 68 tests covering:
+
+| Class | What's tested |
+|---|---|
+| `TestDegreesToCompass` | Cardinal/intercardinal directions, 360° wrap, `None` → `'variable'` |
+| `TestCToF` | Freezing, boiling, −40 crossover, body temp, `None` passthrough |
+| `TestKnotsToMph` | Zero, 10 kt, 100 kt conversions, `None` passthrough |
+| `TestParseWxString` | Intensity prefixes (`-`/`+`), descriptors (FZ, BL, SH), phenomena (rain, snow, fog, TS), multi-token strings, unknown tokens skipped |
+| `TestBuildSummary` | Temperature/dewpoint, wind (calm/variable/gusty), visibility levels, altimeter, cloud layers (CLR→OVC, CB), missing fields don't crash |
+| `TestWeatherIcon` | All 10 weather emojis (⛈️ 🌧️ ❄️ 🌫️ 😶‍🌫️ ☀️ ☁️ 🌥️ ⛅ 🌤️) |
+| `TestIndexRoute` | GET 200, empty code validation, valid/unknown airport (mocked API), timeout/connection errors, lowercase code uppercased |
+
 ## Usage
 
 Type a 4-letter ICAO airport code into the search box and press **Get Weather**. ICAO codes differ from the 3-letter FAA codes used in the US — prefix a `K` to most US airport identifiers (e.g. LAX → `KLAX`, JFK → `KJFK`). International examples: London Heathrow (`EGLL`), Tokyo Haneda (`RJTT`), Sydney (`YSSY`).
